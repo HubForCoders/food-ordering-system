@@ -27,9 +27,11 @@ spring:
     username: postgres
     password: admin
     driver-class-name: org.postgresql.Driver
-    platform: postgres
-    schema: classpath:init-schema.sql
-    initialization-mode: always
+  sql:
+    init:
+      platform: postgres
+      schema-locations: classpath:init-schema.sql
+      mode: always
 
 kafka-config:
   bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
@@ -41,7 +43,7 @@ kafka-config:
 kafka-producer-config:
   key-serializer-class: org.apache.kafka.common.serialization.StringSerializer
   value-serializer-class: io.confluent.kafka.serializers.KafkaAvroSerializer
-  compression-type: none
+  compression-type: snappy
   acks: all
   batch-size: 16384
   batch-size-boost-factor: 100
